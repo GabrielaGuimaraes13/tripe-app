@@ -215,6 +215,11 @@
   </div>
 </div>
 
+<!-- Firebase (só ativa de verdade quando as chaves abaixo forem preenchidas) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+
 <script>
 /* ================= DADOS DA VIAGEM ================= */
 const PARTICIPANTS = ["Bia","Gabi","Leo","David","Renata"];
@@ -416,34 +421,100 @@ const DOCS = [
   {cat:"Voo de volta (Arajet)", date:"2026-10-20", rows:["Confirmação 85YSLS","EWR → Punta Cana: DM5311, 20/10 12h00 → 16h19","Punta Cana → GRU: DM6086, 20/10 18h40 → 02h50 (21/10)"]},
 ];
 
-/* ================= ESTADO (localStorage — trocar por Firebase depois) ================= */
-const StoreKey = k => "tripe_eua2026_"+k;
-function load(k, fallback){ try{ const v = localStorage.getItem(StoreKey(k)); return v?JSON.parse(v):fallback; }catch(e){ return fallback; } }
-function save(k, v){ try{ localStorage.setItem(StoreKey(k), JSON.stringify(v)); }catch(e){} }
+/* ================= ESTADO (Firebase quando configurado; localStorage como fallback) ================= */
 
-let doneItems = load("done", {});
-let parkDone = load("parkDone", {});
-let customItems = load("customItems", {}); // {date: [items]} — sobrepõe DAYS[].items quando editado
+// 👇 COLE AQUI o bloco "firebaseConfig" que o Firebase te deu (Configurações do projeto > Seus apps)
+const firebaseConfig = {
+  apiKey: "AIzaSyB0kXvsUxspJ259LS9iZ-3tVThX4O_LLGk",
+  authDomain: "tripe-eua-2026.firebaseapp.com",
+  projectId: "tripe-eua-2026",
+  storageBucket: "tripe-eua-2026.firebasestorage.app",
+  messagingSenderId: "917166044939",
+  appId: "1:917166044939:web:014d220781a1590f1e540e"
+};
+const FIREBASE_READY = firebaseConfig.apiKey !== "COLE_AQUI";
+const FS_COLLECTION = "tripe_eua2026";
+let db = null;
+
+const DEFAULTS = {
+  done: {},
+  parkDone: {},
+  customItems: {}, // {date: [items]} — sobrepõe DAYS[].items quando editado
+  extras: [
+    {id:"e1", name:"Five Guys", cat:"fastfood", emoji:"🍟", day:null},
+    {id:"e2", name:"Shake Shack", cat:"fastfood", emoji:"🍔", day:null},
+    {id:"e3", name:"Chick-fil-A", cat:"fastfood", emoji:"🍗", day:null},
+    {id:"e4", name:"Raising Cane's", cat:"fastfood", emoji:"🍗", day:null},
+    {id:"e5", name:"Chipotle", cat:"fastfood", emoji:"🌯", day:null},
+    {id:"e6", name:"Wendy's", cat:"fastfood", emoji:"🍔", day:null},
+    {id:"e7", name:"Blizzard (Dairy Queen)", cat:"fastfood", emoji:"🍦", day:"2026-10-10"},
+    {id:"e8", name:"Krispy Kreme", cat:"fastfood", emoji:"🍩", day:null},
+    {id:"e9", name:"Economy Candy (NY)", cat:"fastfood", emoji:"🍬", day:null},
+    {id:"e10", name:"Liberty Bagels (NY)", cat:"fastfood", emoji:"🥯", day:null},
+    {id:"e11", name:"Starbucks", cat:"fastfood", emoji:"☕", day:null},
+    {id:"e12", name:"In-N-Out (se achar no trajeto)", cat:"fastfood", emoji:"🍔", day:null},
+    {id:"e13", name:"White Castle (NY)", cat:"fastfood", emoji:"🍔", day:null},
+    {id:"e14", name:"Bar do HIMYM (McLaren's)", cat:"passeio", emoji:"🛋️", day:null},
+    {id:"e15", name:"Robert's Western World (balada country)", cat:"passeio", emoji:"🤠", day:"2026-10-10"},
+  ],
+  expenses: [],
+  memories: [],
+};
+
+// fallback local (usado só enquanto o Firebase não estiver configurado)
+const StoreKey = k => "tripe_eua2026_"+k;
+function loadLocal(k, fallback){ try{ const v = localStorage.getItem(StoreKey(k)); return v?JSON.parse(v):fallback; }catch(e){ return fallback; } }
+function saveLocal(k, v){ try{ localStorage.setItem(StoreKey(k), JSON.stringify(v)); }catch(e){} }
+
+let doneItems, parkDone, customItems, extras, expenses, memories;
+if(FIREBASE_READY){
+  // valores partem do default; o snapshot do Firestore assume assim que conectar
+  doneItems = DEFAULTS.done; parkDone = DEFAULTS.parkDone; customItems = DEFAULTS.customItems;
+  extras = DEFAULTS.extras; expenses = DEFAULTS.expenses; memories = DEFAULTS.memories;
+} else {
+  doneItems = loadLocal("done", DEFAULTS.done);
+  parkDone = loadLocal("parkDone", DEFAULTS.parkDone);
+  customItems = loadLocal("customItems", DEFAULTS.customItems);
+  extras = loadLocal("extras", DEFAULTS.extras);
+  expenses = loadLocal("expenses", DEFAULTS.expenses);
+  memories = loadLocal("memories", DEFAULTS.memories);
+}
 let editMode = false;
-let extras = load("extras", [
-  {id:"e1", name:"Five Guys", cat:"fastfood", emoji:"🍟", day:null},
-  {id:"e2", name:"Shake Shack", cat:"fastfood", emoji:"🍔", day:null},
-  {id:"e3", name:"Chick-fil-A", cat:"fastfood", emoji:"🍗", day:null},
-  {id:"e4", name:"Raising Cane's", cat:"fastfood", emoji:"🍗", day:null},
-  {id:"e5", name:"Chipotle", cat:"fastfood", emoji:"🌯", day:null},
-  {id:"e6", name:"Wendy's", cat:"fastfood", emoji:"🍔", day:null},
-  {id:"e7", name:"Blizzard (Dairy Queen)", cat:"fastfood", emoji:"🍦", day:"2026-10-10"},
-  {id:"e8", name:"Krispy Kreme", cat:"fastfood", emoji:"🍩", day:null},
-  {id:"e9", name:"Economy Candy (NY)", cat:"fastfood", emoji:"🍬", day:null},
-  {id:"e10", name:"Liberty Bagels (NY)", cat:"fastfood", emoji:"🥯", day:null},
-  {id:"e11", name:"Starbucks", cat:"fastfood", emoji:"☕", day:null},
-  {id:"e12", name:"In-N-Out (se achar no trajeto)", cat:"fastfood", emoji:"🍔", day:null},
-  {id:"e13", name:"White Castle (NY)", cat:"fastfood", emoji:"🍔", day:null},
-  {id:"e14", name:"Bar do HIMYM (McLaren's)", cat:"passeio", emoji:"🛋️", day:null},
-  {id:"e15", name:"Robert's Western World (balada country)", cat:"passeio", emoji:"🤠", day:"2026-10-10"},
-]);
-let expenses = load("expenses", []);
-let memories = load("memories", []);
+let activeTab = "hoje";
+
+function save(key, value){
+  if(FIREBASE_READY && db){
+    db.collection(FS_COLLECTION).doc(key).set({value: value}).catch(e=>console.error("Firestore save:", key, e));
+  } else {
+    saveLocal(key, value);
+  }
+}
+function refreshCurrentTab(){
+  if(activeTab==="hoje") renderHoje();
+  if(activeTab==="mapa") renderMapa();
+  if(activeTab==="extras") renderExtras();
+  if(activeTab==="financeiro") renderFinanceiro();
+  if(activeTab==="memoria") renderMemoria();
+}
+function startFirebaseSync(){
+  const setters = {
+    done: v=>doneItems=v, parkDone: v=>parkDone=v, customItems: v=>customItems=v,
+    extras: v=>extras=v, expenses: v=>expenses=v, memories: v=>memories=v,
+  };
+  Object.keys(setters).forEach(key=>{
+    db.collection(FS_COLLECTION).doc(key).onSnapshot(snap=>{
+      if(snap.exists){ setters[key](snap.data().value); }
+      else { db.collection(FS_COLLECTION).doc(key).set({value: DEFAULTS[key]}); }
+      refreshCurrentTab();
+    }, err=>console.error("Firestore sync:", key, err));
+  });
+}
+if(FIREBASE_READY){
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.firestore();
+  firebase.auth().signInAnonymously().catch(e=>console.error("Auth anônima:", e));
+  firebase.auth().onAuthStateChanged(user=>{ if(user) startFirebaseSync(); });
+}
 
 const ALBUM_UNLOCK = new Date("2026-11-20T00:00:00-03:00");
 const CAT_COLORS = {fastfood:{bg:"#FBE4CD", fg:"#B85C2E"}, passeio:{bg:"#DCEBF2", fg:"#2E6B85"}, outlet:{bg:"#F5E6BE", fg:"#8A6A1A"}, outro:{bg:"#F6D9E2", fg:"#A14E6B"}};
@@ -475,6 +546,7 @@ function pickColor(idx){
 
 /* ================= TAB SWITCH ================= */
 function switchTab(tab){
+  activeTab = tab;
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("screen-"+tab).classList.add("active");
   document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active", b.dataset.tab===tab));
