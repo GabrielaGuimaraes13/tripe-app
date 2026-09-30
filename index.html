@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Tripê</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#21402E">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAFP0lEQVR4nO3cS3JTSRBG4ZKjNwIDhrCDDlgXY9aFgx3gYQ/aS4EBCGT5PuqRWY8/zzeFsKt8z02XJEuXNIE3H9//GL0GtHt+fLqMXsOQBRBwDCMC7/YNiTi2XnG7fhMixhbPuF2+MCEjh0fYD9ZfkJiRy6MVszuEkNHCalqbTGhiRiurhpruCkKGh5ZpXT2hiRleWtqqCpqY4a22seKgiRm91LRWFDQxo7fS5rKDJmaMUtJeVtDEjNFyGzwNmpgxi5wWzV/6BkY6DJrpjNmcNbkbNDFjVkdtcuSAlM2gmc6Y3V6jr4ImZqxiq1WOHJDyImimM1Zz3ywTGlIIGlL+BM1xA6u6bZcJDSkEDSkPKXHcwPquDTOhIYWgIYWgIeXC+RlKmNCQQtCQQtCQQtCQQtCQQtCQQtCQQtCQQtCQ8s/oBSj6/+v37P/79tMHx5XEw0vfjUrizUXk9Qi6gkfEe4i7DEEX6BnyPcLOQ9AZRoZ8j7CPEfSBmUK+R9jbeNpux8wxpzT/+kYh6A2rxLLKOnviyHFj5UA4gvzChP5t5ZhTWn/9Vgg66cSgso8W4YNWi0BtP6VCB6168VX3lSNs0OoXXX1/e8IGDU0hg44yvaLs81a4oKNd5Gj7DRV0tIt7FWnfoYKGvjBBR5pSW6LsP0zQiCHEHyeNmE7/ff738N/fffnWaSUvqf8RE+/6NnQW8d7/HRW3IvkJ3WM6l4R8pFfYylOaM3Qjq5itv1ZUBN3AI0CibiMdtOdxwzM876iVn8KTDtpLjynKpK5D0IV6hkbU5QgaUgi6wIiJyZQuIxu08gMfC6o/H9mgERNBZxr5q59jRz6ChhSChhSChhSChhSChhSChhSCzjTyXSW8oyUfQUOKbNDKbzOyoPrzkQ3aw4hf/Rw3yhA0pBB0oZ4Tk+lcjqAr9AiNmOtIB+35wMczOO+YVR8QpiQetDeP8JjMbQi6kWWAxNxO/qPAUur3dqPaP8TvGbLycSMlPqzR1G2Ys376qLoQEzol3TeFllCfzilxhoaYMEFHmE5Houw/TNCIgaADiDKdUwoWdKQLexVtz6GCTineBY4mXNCRRLx5QwYd4UJH2OOWkEGnpH3Blfd2JmzQKcW+8KpCB60o+k0aPmilAJT2Uit80ClphKCwBwsE/RtBaCBoAdyMfxH0jRXDWHHNngj6zkqBrLTWXgh6A6Gsi6AXxU23jaB3zBzMzGsbjaAPEM56CPrEbFHPtp7ZEPRCiPkcQWeYIaQZ1rACgs5EUGsg6AKjouZmykfQkyPmMgRdqGdgxFyOoCsQ2rwIupJ31Nw0dQh6QsRcj6AbEN58CLqRddTcJG0I2oBVhMTcjqAnQcw2CNoIQc6BoA3VRs3NYIegjZXGScy2CHogYrZH0A4IdRyCdnIWNdH7IGhHe9ESsx+C7oyYfRG0MwLui6A7uEZN3P4ubz6+/zF6EYAVJjSkEDSkEDSkEDSkEDSkPDw/Pl1GLwKw8Pz4dGFCQwpBQwpBQ8pDSr/OHqMXArS4NsyEhhSChpQ/QXPswKpu22VCQwpBQ8qLoDl2YDX3zTKhIeVV0ExprGKr1c0JTdSY3V6jHDkgZTdopjRmddTm4YQmaszmrEmOHJByGjRTGrPIaTFrQhM1RsttMPvIQdQYpaS9ojM0UaO30uaKHxQSNXqpaa3qWQ6ihrfaxqqftiNqeGlpyyRKPpIXFiyGpMkLK0xrtLJqyDxEpjVKWA9D85e+mdbI5dGKa3xMa2zxHHrdpilxx9brN/eQ4wFxxzDi+DnFeZfANczw+OknudKP5Qq/L5sAAAAASUVORK5CYII=">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAByUlEQVR4nO1bS1bDMAx0/LgILFjSG/DgXKw5F329AV2yoEeBlXnB9U+pNIptzS6uW2tGI9lNm8URcP/y9EOZr4XL8by0zq1O7IV0DjUxfOnF3sk7V+eQVGcE4imk3HDlgFHJO5fm5msTRkPMsdgDZsCfADNkP2DN1ccDsyBwthLQDkAby4z2X2N6B5gA2gFo405j0e+Pz+T4w+sBHAmwCeZI54ASA1ICVPJb37MFog7gIiHpBjEHcGZQ0g3T7wIiAkhkTMoF7D2gNdCvt+d/14/vp6b3cfcD+DkgJh6PtwrBBWgPyJGnzuEEqwCIvZt7DZgDKJlFusC2Qe0AtGECoBaibG/IrZBVAMRXWO41oCXQkln0QQh+EgwEtx6FuSFyP0DqQCRRYrYLSHyoRKakGqyYAzTu8G5BFyXQ5T1B53gCl3aSuANuIYAoI0gJ7LkfwHoAVYShfhmiAukYqAB7LAW4A2oioEVSKYEcSQ2H7KYHaJWHmgB76QeqDggiaIphf5PTDkAbJgDlAaPRcDmeF3OAdgDa8M7RnrMbBYGzjwdmwJqrlcD6YgYXxByvHDCyCCluRbKjHJNLSS32gBHcUONAItiLIyiJ+wWxlJJCKTVfngAAAABJRU5ErkJggg==">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Tripê">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF6EE; --ink:#2A241C; --primary:#21402E; --primary-dark:#162C1F;
+    --accent:#D97A3D; --accent-soft:#FCEFDD; --blue:#4E8FB5; --blue-soft:#DCEBF2;
+    --gold:#E3A72B; --gold-soft:#F5E6BE; --pink:#D9678C; --pink-soft:#F6D9E2;
+    --muted:#8A8070; --line:#EDE4CF; --line2:#E3D9BF; --good:#4F7A5A; --bad:#C1543E;
+    --card:#FFFFFF; --display:'Fraunces',serif; --body:'Public Sans',sans-serif;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--body);}
+  h1,h2,h3{font-family:var(--display); margin:0;}
+  button{font-family:var(--body); cursor:pointer;}
+  ul{list-style:none; margin:0; padding:0;}
+
+  /* HEADER (curved hero) */
+  .app-header{
+    background:var(--primary); color:#fff; padding:calc(18px + env(safe-area-inset-top,0px)) 20px 20px;
+    border-radius:0 0 28px 28px; position:relative; overflow:hidden; flex:none;
+  }
+  .app-header.tall{padding-bottom:26px;}
+  .header-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .brand{display:flex; align-items:center; gap:8px;}
+  .brand .name{font-family:var(--display); font-weight:700; font-size:17px;}
+  .docs-btn{background:rgba(255,255,255,.16); border:none; color:#fff; border-radius:50%; width:34px; height:34px; display:flex; align-items:center; justify-content:center; font-size:15px;}
+  .header-greeting{color:#CFE0D2; font-size:12.5px; font-weight:600; margin-bottom:4px;}
+  .header-title{font-size:21px; font-weight:700; color:#fff; margin:0 0 10px; line-height:1.2;}
+  .header-simple-title{font-size:19px; font-weight:700; color:#fff; display:flex; align-items:center; gap:8px;}
+  .date-pill{display:inline-flex; align-items:center; gap:6px; background:var(--accent); padding:5px 13px; border-radius:999px; font-size:11.5px; font-weight:700;}
+  .day-nav{position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.18); border:none; color:#fff; width:30px; height:30px; border-radius:50%; font-size:15px; display:flex; align-items:center; justify-content:center;}
+  .day-nav.prev{left:14px;} .day-nav.next{right:14px;}
+  .day-nav:disabled{opacity:.25;}
+  .deco-path{position:absolute; right:18px; bottom:10px; opacity:.3; pointer-events:none;}
+
+  main{flex:1; overflow-y:auto; padding-bottom:86px;}
+  .screen{display:none;}
+  .screen.active{display:block;}
+  .inner{padding:20px 18px 4px; max-width:600px; margin:0 auto;}
+
+  #app{display:flex; flex-direction:column; height:100vh;}
+
+  /* BOTTOM NAV */
+  .bottomnav{
+    position:fixed; bottom:0; left:0; right:0; z-index:40; display:flex; background:var(--bg);
+    border-top:1px solid var(--line); padding:8px 6px calc(6px + env(safe-area-inset-bottom,0px));
+  }
+  .navbtn{flex:1; background:none; border:none; display:flex; flex-direction:column; align-items:center; gap:2px; padding:5px 2px; color:#C7BDA0; font-size:10px; font-weight:600;}
+  .navbtn .ic{font-size:18px;}
+  .navbtn.active{color:var(--primary); font-weight:700;}
+
+  .card{background:var(--card); border-radius:18px; padding:16px; box-shadow:0 4px 14px rgba(33,64,46,.07); margin-bottom:14px;}
+  .section-title{font-size:12.5px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin-bottom:10px;}
+
+  /* TIMELINE (Hoje) */
+  .loc-line{color:var(--muted); font-size:13px; margin:-2px 0 16px; text-align:center;}
+  .timeline{position:relative; margin-top:6px;}
+  .timeline::before{content:""; position:absolute; left:50%; top:6px; bottom:6px; width:3px; background:var(--line2); transform:translateX(-50%); border-radius:3px;}
+  .timeline .fill{position:absolute; left:50%; top:6px; width:3px; background:var(--good); transform:translateX(-50%); border-radius:3px; transition:height .3s;}
+  .trow{display:flex; align-items:center; margin-bottom:10px; min-height:60px; position:relative;}
+  .trow .side{flex:1;}
+  .trow .side.left{text-align:right; padding-right:16px;}
+  .trow .side.right{text-align:left; padding-left:16px;}
+  .tbadge{flex:none; width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; z-index:1; box-shadow:0 0 0 5px var(--bg); cursor:pointer;}
+  .tcard{display:inline-block; background:#fff; border-radius:16px; padding:11px 14px; max-width:155px; box-shadow:0 4px 12px rgba(33,64,46,.08); cursor:pointer;}
+  .tcard.done{opacity:.5;}
+  .tcard .nm{font-size:13.5px; font-weight:600; color:var(--ink);}
+  .tcard.done .nm{text-decoration:line-through; color:var(--muted);}
+  .tcard .flag{font-size:9.5px; font-weight:800; margin-top:3px; letter-spacing:.02em;}
+
+  .empty-note{color:var(--muted); font-size:14px; text-align:center; padding:34px 10px;}
+
+  /* MAPA */
+  .map-wrap{position:relative; padding:16px 0 40px;}
+  .blob{position:absolute; border-radius:50%; opacity:.5; pointer-events:none;}
+  .mstop{position:absolute; text-align:center;}
+  .mstop .circ{border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 3px 8px rgba(0,0,0,.12); margin:0 auto;}
+  .mstop.current .circ{box-shadow:0 0 0 6px var(--accent-soft), 0 4px 10px rgba(217,122,61,.4);}
+  .mstop .car{position:absolute; right:-4px; bottom:-4px; width:24px; height:24px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; font-size:13px; box-shadow:0 2px 5px rgba(0,0,0,.25);}
+  .mstop .lbl{font-size:10px; font-weight:700; color:#5C5647; margin-top:5px; width:90px; margin-left:-27px;}
+  .mstop.current .lbl{color:var(--accent); font-weight:800; font-size:11px;}
+  .mstop .here{font-size:9px; font-weight:700; color:var(--muted); margin-top:1px;}
+
+  /* EXTRAS */
+  .extras-tabs{display:flex; gap:7px; margin-bottom:16px; overflow-x:auto; padding-bottom:2px;}
+  .extras-tabs button{background:#fff; border:1.5px solid var(--line2); padding:7px 14px; border-radius:999px; font-size:12px; font-weight:700; color:var(--muted); white-space:nowrap;}
+  .extras-tabs button.active{background:var(--primary); color:#fff; border-color:var(--primary);}
+  .chip-group{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px;}
+  .chip{display:inline-flex; align-items:center; gap:5px; padding:9px 13px; border-radius:999px; font-size:12.5px; font-weight:700;}
+  .chip select{border:none; background:transparent; font-family:var(--body); font-weight:700; font-size:11px; color:inherit; padding:0; margin-left:2px;}
+  .fab{position:fixed; right:20px; bottom:92px; width:52px; height:52px; border-radius:50%; background:var(--accent); color:#fff; border:none; font-size:24px; box-shadow:0 4px 14px rgba(217,122,61,.4); z-index:41;}
+
+  /* FINANCEIRO */
+  .balance-row{display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid var(--line); font-size:14px;}
+  .balance-row:last-child{border-bottom:none;}
+  .balance-row .amt.pos{color:var(--good); font-weight:800;}
+  .balance-row .amt.neg{color:var(--bad); font-weight:800;}
+  .exp-item{display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--line); font-size:13px;}
+  .exp-item:last-child{border-bottom:none;}
+  .exp-item .d{color:var(--muted); font-size:11px;}
+
+  /* MEMORIA */
+  .lock-screen{text-align:center; padding:44px 20px;}
+  .lock-screen .icon{font-size:40px; margin-bottom:12px;}
+  .lock-screen h3{font-size:18px; color:var(--primary); margin-bottom:8px;}
+  .lock-screen p{color:var(--muted); font-size:13.5px; line-height:1.5;}
+  .mem-entry{background:#fff; border-radius:18px; padding:14px; margin-bottom:12px; box-shadow:0 4px 12px rgba(33,64,46,.08);}
+  .mem-entry img{width:100%; border-radius:12px; margin-bottom:8px;}
+  .mem-entry .dt{font-size:11px; color:var(--accent); font-weight:800; text-transform:uppercase;}
+  .mem-entry .txt{font-size:14px; margin-top:5px;}
+
+  /* FORM */
+  .field{margin-bottom:12px;}
+  .field label{display:block; font-size:12px; font-weight:700; color:var(--muted); margin-bottom:5px;}
+  .field input, .field select, .field textarea{width:100%; padding:11px 13px; border:1.5px solid var(--line2); border-radius:12px; font-family:var(--body); font-size:14.5px; background:#fff;}
+  .field textarea{resize:vertical; min-height:60px;}
+  .btn{background:var(--primary); color:#fff; border:none; padding:13px 18px; border-radius:999px; font-weight:700; font-size:14.5px; width:100%;}
+
+  /* SHEET */
+  .sheet-overlay{position:fixed; inset:0; background:rgba(30,25,15,.5); z-index:60; display:none; align-items:flex-end; justify-content:center;}
+  .sheet-overlay.open{display:flex;}
+  .sheet{background:var(--bg); width:100%; max-width:600px; border-radius:24px 24px 0 0; padding:20px 20px calc(24px + env(safe-area-inset-bottom,0px)); max-height:82vh; overflow-y:auto;}
+  .sheet-handle{width:40px; height:4px; background:var(--line2); border-radius:4px; margin:0 auto 16px;}
+  .sheet-title{font-family:var(--display); font-size:19px; font-weight:700; margin-bottom:14px; color:var(--primary);}
+  .doc-block{background:#fff; border-radius:16px; padding:13px 15px; margin-bottom:10px; box-shadow:0 3px 10px rgba(33,64,46,.06);}
+  .doc-block.today{background:var(--accent-soft); box-shadow:0 3px 10px rgba(217,122,61,.15);}
+  .doc-block .dtitle{font-weight:700; font-size:14px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;}
+  .doc-block .drow{font-size:12.5px; color:var(--ink); margin-top:3px;}
+  .today-flag{font-size:9.5px; background:var(--accent); color:#fff; padding:2px 8px; border-radius:999px; font-weight:700;}
+</style>
+</head>
+<body>
+<div id="app">
+
+<header class="app-header tall" id="appHeader">
+  <div class="header-top">
+    <div class="brand">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8z" fill="#fff"/><circle cx="12" cy="10" r="3" fill="#D97A3D"/></svg>
+      <span class="name">Tripê</span>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button class="docs-btn" id="editBtn" onclick="toggleEditMode()" style="display:none;">✏️</button>
+      <button class="docs-btn" onclick="openDocs()">📁</button>
+    </div>
+  </div>
+  <div id="headerBody"></div>
+</header>
+
+<main>
+  <section id="screen-hoje" class="screen active"></section>
+  <section id="screen-mapa" class="screen"></section>
+  <section id="screen-extras" class="screen"></section>
+  <section id="screen-financeiro" class="screen"></section>
+  <section id="screen-memoria" class="screen"></section>
+</main>
+
+<button class="fab" id="fabExtra" style="display:none" onclick="openAddExtra()">+</button>
+
+<nav class="bottomnav">
+  <button class="navbtn active" data-tab="hoje" onclick="switchTab('hoje')"><span class="ic">✅</span>Hoje</button>
+  <button class="navbtn" data-tab="mapa" onclick="switchTab('mapa')"><span class="ic">🗺️</span>Mapa</button>
+  <button class="navbtn" data-tab="extras" onclick="switchTab('extras')"><span class="ic">✨</span>Extras</button>
+  <button class="navbtn" data-tab="financeiro" onclick="switchTab('financeiro')"><span class="ic">💰</span>Gastos</button>
+  <button class="navbtn" data-tab="memoria" onclick="switchTab('memoria')"><span class="ic">📸</span>Memória</button>
+</nav>
+</div>
+
+<!-- DOCUMENTOS SHEET -->
+<div class="sheet-overlay" id="docsOverlay" onclick="if(event.target===this) closeDocs()">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">📁 Documentos da viagem</div>
+    <div class="field"><input type="text" id="docSearch" placeholder="Buscar (ex: voo, hotel, carro...)" oninput="renderDocs()"></div>
+    <div id="docsList"></div>
+  </div>
+</div>
+
+<!-- ADD EXTRA SHEET -->
+<div class="sheet-overlay" id="addExtraOverlay" onclick="if(event.target===this) closeAddExtra()">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">✨ Adicionar em Extras</div>
+    <div class="field"><label>Nome</label><input type="text" id="newExtraName" placeholder="Ex: Krispy Kreme"></div>
+    <div class="field"><label>Categoria</label>
+      <select id="newExtraCat">
+        <option value="fastfood">🍔 Fast food</option>
+        <option value="passeio">📍 Passeio / ponto turístico</option>
+        <option value="outlet">🏬 Outlet / loja</option>
+        <option value="outro">✨ Outro</option>
+      </select>
+    </div>
+    <button class="btn" onclick="addExtra()">Adicionar</button>
+  </div>
+</div>
+
+<!-- PARK ATTRACTIONS SHEET -->
+<div class="sheet-overlay" id="parkOverlay" onclick="if(event.target===this) closeParkSheet()">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title" id="parkSheetTitle"></div>
+    <div id="parkSheetList"></div>
+  </div>
+</div>
+
+<script>
+/* ================= DADOS DA VIAGEM ================= */
+const PARTICIPANTS = ["Bia","Gabi","Leo","David","Renata"];
+
+const PARKS = {
+  mk: {name:"Magic Kingdom", emoji:"🏰", items:[
+    {name:"Space Mountain", prio:1},{name:"Tron", prio:1},{name:"Haunted Mansion", prio:1},
+    {name:"Tiana's Bayou Adventure", prio:1},{name:"Meet Mickey", prio:1},
+    {name:"Área dos Enrolados", prio:1, note:"melhor à noite"},
+    {name:"Meet Cinderella + surpresa", prio:2},{name:"Meet Daring", prio:2},{name:"Big Thunder", prio:2},
+  ]},
+  seaworld: {name:"SeaWorld", emoji:"🐋", items:[
+    {name:"Ice Break", prio:1},{name:"Kraken", prio:1},{name:"Mako", prio:1},{name:"Manta", prio:1},{name:"Pipeline", prio:1},
+    {name:"Show de golfinhos e orcas", prio:1},
+    {name:"All-New Penguin", prio:2},{name:"Journey to Atlantis", prio:2},
+  ]},
+  universalStudios: {name:"Universal Studios", emoji:"🎬", items:[
+    {name:"Harry Potter — Escape from Gringotts", prio:1},
+    {name:"Revenge of the Mummy", prio:1},
+    {name:"Transformers", prio:1},
+    {name:"Despicable Me Minion Mayhem", prio:2},
+    {name:"The Simpsons Ride", prio:2},
+  ]},
+  buschGardens: {name:"Busch Gardens", emoji:"🎢", items:[
+    {name:"Iron Gwazi", prio:1},{name:"SheiKra", prio:1},{name:"Montu", prio:1},{name:"Tigris", prio:1},
+    {name:"Cheetah Hunt", prio:1},{name:"Falcon's Fury", prio:1},{name:"Serengeti", prio:1},
+    {name:"Phoenix Rising", prio:2},{name:"Cobra's Curse", prio:2},{name:"Kumba", prio:2},
+  ]},
+  ioa: {name:"Islands of Adventure", emoji:"🦖", items:[
+    {name:"Harry Potter and the Forbidden Journey", prio:0},
+    {name:"Velocicoaster", prio:0},
+    {name:"Hagrid's", prio:0},
+    {name:"Amazing Adventures of Spider-Man", prio:1},
+    {name:"Dudley Do-Right's Ripsaw Falls", prio:1},
+    {name:"Incredible Hulk", prio:1},
+    {name:"Doctor Doom's Fearfall", prio:2},{name:"King Kong", prio:2},
+  ]},
+  animalKingdom: {name:"Animal Kingdom", emoji:"🦁", items:[
+    {name:"Expedition Everest", prio:1},{name:"Avatar (as 2 atrações)", prio:1},
+    {name:"Gorilla Falls", prio:1},{name:"Zootopia", prio:1},{name:"Meet Mickey e Minnie", prio:1},
+    {name:"Show Feathered Friends", prio:1, note:"14h45"},
+    {name:"Safari", prio:2, note:"rende mais de manhã cedo"},
+  ]},
+};
+
+const DAYS = [
+ {date:"2026-10-01", wd:"Qui", phase:"prep", node:0, title:"Preparativos finais em São Paulo", loc:"Santo André / Guarulhos",
+  items:[
+   {name:"Fechar malas (23kg despachada / 6kg mão)", prio:2},
+   {name:"Conferir peso e medidas das malas", prio:1},
+   {name:"Comprar snacks pro voo", prio:2},
+   {name:"Saída de casa às 22h — Tia Vick leva pro Guarulhos", prio:0, emoji:"🚗"},
+  ]},
+ {date:"2026-10-02", wd:"Sex", phase:"orlando", node:1, title:"Embarque + chegada em Orlando", loc:"Orlando, FL",
+  items:[
+   {name:"Embarque em Guarulhos (voo 03h50)", prio:0, emoji:"✈️"},
+   {name:"Retirada do carro no aeroporto", prio:0, emoji:"🚗"},
+   {name:"Check-in no condo", prio:0, emoji:"🏡"},
+   {name:"Retirar brindes e chips", prio:1},
+   {name:"Jantar no Five Guys", prio:1, extra:true, emoji:"🍔"},
+   {name:"Dollar Tree + Walmart (snacks pros parques)", prio:1, emoji:"🛒"},
+  ]},
+ {date:"2026-10-03", wd:"Sáb", phase:"orlando", node:1, title:"Magic Kingdom", loc:"Orlando, FL",
+  items:[
+   {name:"Magic Kingdom", prio:0, isPark:true, parkKey:"mk", emoji:"🏰"},
+  ]},
+ {date:"2026-10-04", wd:"Dom", phase:"orlando", node:1, title:"Compras: Outlet, Disney Springs, Old Town", loc:"Orlando, FL",
+  items:[
+   {name:"Outlet (lojas a definir)", prio:1, emoji:"🛍️"},
+   {name:"Disney Springs", prio:1},
+   {name:"Old Town", prio:2},
+   {name:"Levar sacola/mala extra vazia", prio:1},
+  ]},
+ {date:"2026-10-05", wd:"Seg", phase:"orlando", node:1, title:"SeaWorld", loc:"Orlando, FL",
+  items:[
+   {name:"SeaWorld", prio:0, isPark:true, parkKey:"seaworld", emoji:"🐋"},
+  ]},
+ {date:"2026-10-06", wd:"Ter", phase:"orlando", node:1, title:"Universal Studios", loc:"Orlando, FL",
+  items:[
+   {name:"Universal Studios", prio:0, isPark:true, parkKey:"universalStudios", emoji:"🎬"},
+  ]},
+ {date:"2026-10-07", wd:"Qua", phase:"orlando", node:1, title:"Busch Gardens", loc:"Orlando, FL",
+  items:[
+   {name:"Busch Gardens", prio:0, isPark:true, parkKey:"buschGardens", emoji:"🎢"},
+  ]},
+ {date:"2026-10-08", wd:"Qui", phase:"orlando", node:1, title:"Universal — Islands of Adventure", loc:"Orlando, FL",
+  items:[
+   {name:"Islands of Adventure", prio:0, isPark:true, parkKey:"ioa", emoji:"🦖"},
+   {name:"Noite: Cowboys Orlando", prio:1, extra:true, emoji:"🤠"},
+  ]},
+ {date:"2026-10-09", wd:"Sex", phase:"orlando", node:1, title:"Animal Kingdom", loc:"Orlando, FL",
+  items:[
+   {name:"Animal Kingdom", prio:0, isPark:true, parkKey:"animalKingdom", emoji:"🦁"},
+  ]},
+ {date:"2026-10-10", wd:"Sáb", phase:"estrada", node:2, title:"Checkout Orlando + estrada até Nashville", loc:"Covington, GA → Nashville, TN",
+  items:[
+   {name:"Checkout até 11h", prio:0, emoji:"🏡"},
+   {name:"Parada em Covington (cenário de The Vampire Diaries)", prio:1, extra:true},
+   {name:"Almoço em Covington", prio:1, emoji:"🍔"},
+   {name:"Chegada em Nashville (19h–20h)", prio:0, emoji:"🚗"},
+   {name:"Noite: balada country", prio:1, extra:true, emoji:"🤠"},
+  ]},
+ {date:"2026-10-11", wd:"Dom", phase:"estrada", node:3, title:"Estrada até Washington D.C.", loc:"Silver Spring, MD",
+  items:[
+   {name:"Checkout às 11h", prio:0, emoji:"🏡"},
+   {name:"~10h30 de estrada", prio:0, emoji:"🚗"},
+   {name:"Jantar em Washington D.C.", prio:1, emoji:"🍔"},
+   {name:"Chegada em Silver Spring (20h–21h)", prio:0},
+  ]},
+ {date:"2026-10-12", wd:"Seg", phase:"estrada", node:4, title:"Delaware → Filadélfia → Casa das Montanhas", loc:"East Stroudsburg, PA",
+  items:[
+   {name:"Compras em Delaware pela manhã", prio:1, emoji:"🛍️"},
+   {name:"Devolução do carro em Filadélfia", prio:0, emoji:"🚗"},
+   {name:"Chegada na Casa das Montanhas (Alpine Lodge)", prio:0, emoji:"🏡"},
+   {name:"Organizar compras e malas + jantar em grupo", prio:1},
+  ]},
+ {date:"2026-10-13", wd:"Ter", phase:"casamento", node:4, title:"Casa das Montanhas — dia livre + despedida da Thaina", loc:"East Stroudsburg, PA",
+  items:[
+   {name:"Dia livre na casa", prio:2},
+   {name:"Noite: despedida de solteira da Thaina", prio:0, emoji:"🥂"},
+  ]},
+ {date:"2026-10-14", wd:"Qua", phase:"casamento", node:5, title:"Casa das Montanhas → Hotel do casamento", loc:"Collegeville, PA",
+  items:[
+   {name:"Saída da casa até 10h", prio:0},
+   {name:"Check-in no Hilton Garden Inn", prio:0, emoji:"🏡"},
+   {name:"Ajudar a Thaina com últimos detalhes", prio:1},
+   {name:"Separar e passar a roupa do casamento", prio:1, emoji:"👗"},
+  ]},
+ {date:"2026-10-15", wd:"Qui", phase:"casamento", node:5, title:"💍 CASAMENTO — Hilton Garden Inn", loc:"Collegeville, PA",
+  items:[
+   {name:"Manhã: cabelo e maquiagem", prio:0, emoji:"💄"},
+   {name:"Cerimônia", prio:0, emoji:"💍"},
+   {name:"Festa", prio:0, emoji:"🥂"},
+  ]},
+ {date:"2026-10-16", wd:"Sex", phase:"nyc", node:6, title:"Filadélfia → Nova York", loc:"Filadélfia, PA → Brooklyn, NY",
+  items:[
+   {name:"Reading Terminal Market", prio:1, extra:true},
+   {name:"City Hall / Dilworth Park / LOVE Park", prio:1, extra:true},
+   {name:"Independence Hall + Liberty Bell", prio:1, extra:true},
+   {name:"Rocky Steps (Philadelphia Museum of Art)", prio:1, extra:true},
+   {name:"Check-in Super 8 Brooklyn", prio:0, emoji:"🏡"},
+   {name:"Noite: Times Square", prio:1, extra:true, emoji:"🌃"},
+  ]},
+ {date:"2026-10-17", wd:"Sáb", phase:"nyc", node:7, title:"Nova York — Midtown", loc:"Manhattan, NY",
+  items:[
+   {name:"Rockefeller Center", prio:1},{name:"St. Patrick's Cathedral", prio:1},{name:"5th Avenue", prio:1},
+   {name:"Central Park", prio:1},{name:"Grand Central Terminal", prio:1},{name:"Chrysler Building", prio:2},
+   {name:"Bryant Park", prio:2},{name:"Times Square", prio:1},
+   {name:"Noite: jantar + balada com a Thaina", prio:1, emoji:"🥂"},
+  ]},
+ {date:"2026-10-18", wd:"Dom", phase:"nyc", node:7, title:"Nova York — Downtown / Village", loc:"Manhattan, NY",
+  items:[
+   {name:"SoHo", prio:1},{name:"Greenwich Village", prio:1},{name:"Washington Square Park", prio:1},
+   {name:"West Village", prio:2},{name:"High Line", prio:1},{name:"Hudson Yards", prio:2},
+  ]},
+ {date:"2026-10-19", wd:"Seg", phase:"nyc", node:7, title:"Nova York — últimos passeios", loc:"Manhattan / Brooklyn, NY",
+  items:[
+   {name:"Lower Manhattan + Battery Park", prio:1},{name:"Estátua da Liberdade (vista)", prio:1},
+   {name:"Wall Street + Charging Bull", prio:2},{name:"9/11 Memorial", prio:1},
+   {name:"Brooklyn Bridge + DUMBO (pôr do sol)", prio:0},
+   {name:"Organizar malas à noite", prio:1},
+  ]},
+ {date:"2026-10-20", wd:"Ter", phase:"nyc", node:8, title:"VOLTA — embarque em Newark", loc:"Newark, NJ (EWR)",
+  items:[
+   {name:"Checkout às 7h", prio:0},
+   {name:"Ida pro aeroporto de Newark", prio:0, emoji:"🚗"},
+   {name:"Voo Arajet DM5311 — 12h00", prio:0, emoji:"✈️"},
+   {name:"Conferir check-in online antes do dia", prio:1},
+  ]},
+ {date:"2026-10-21", wd:"Qua", phase:"nyc", node:8, title:"Chegada ao Brasil", loc:"São Paulo, GRU",
+  items:[
+   {name:"Chegada em GRU às 02h50", prio:0, emoji:"✈️"},
+   {name:"Combinar quem busca no aeroporto", prio:1, emoji:"🚗"},
+  ]},
+];
+
+const ROUTE_NODES = [
+  {label:"São Paulo", sub:"Partida", emoji:"🏠", x:28},
+  {label:"Orlando, FL", sub:"02–09/10", emoji:"🎢", x:68},
+  {label:"Nashville, TN", sub:"10/10", emoji:"🎸", x:25},
+  {label:"Washington D.C.", sub:"11/10", emoji:"🏛️", x:70},
+  {label:"Casa das Montanhas", sub:"12–13/10", emoji:"🏔️", x:22},
+  {label:"Collegeville, PA", sub:"Casamento", emoji:"💍", x:72},
+  {label:"Filadélfia → NY", sub:"16/10", emoji:"🌉", x:26},
+  {label:"Nova York", sub:"17–19/10", emoji:"🗽", x:66},
+  {label:"Volta ao Brasil", sub:"20–21/10", emoji:"✈️", x:48},
+];
+const NODE_COLORS = ["#4F7A5A","#D97A3D","#4E8FB5","#E3A72B","#4F7A5A","#D9678C","#4E8FB5","#21402E","#8A8070"];
+
+const DOCS = [
+  {cat:"Voos (ida)", date:"2026-10-02", rows:["Bia, Gabi e Leo — localizador XHGAJI","David — localizador VM9RIO","Renata — localizador 3F04ON"]},
+  {cat:"Carro alugado", date:"2026-10-02", rows:["Reserva nº 796727712","Retirada: aeroporto de Orlando, 02/10","Devolução: centro da Filadélfia, 13/10 até 12h","Tanque cheio na retirada e na devolução"]},
+  {cat:"Hotel Orlando", date:"2026-10-02", rows:["Condo w Hot Tub & Pool — Canada Ave 7601, Orlando, FL","Check-in 02/10 16h → Checkout 10/10 11h","Reserva nº 6945193790 — PIN 1362","Tel: +1 689-312-8998"]},
+  {cat:"Hotel Nashville", date:"2026-10-10", rows:["Super 8 by Wyndham — 821 Murfreesboro Pike, Nashville, TN","Check-in 10/10 15h → Checkout 11/10 11h","Confirmação 5984.207.024 — PIN 9499","Tel: +1 615 399 0017"]},
+  {cat:"Hotel Silver Spring / DC", date:"2026-10-11", rows:["Travelodge by Wyndham — 8040 13th St, Silver Spring, MD","Check-in 11/10 15h → Checkout 12/10 11h","Confirmação 5716.824.514 — PIN 5808","Tel: +1 301 495 0808"]},
+  {cat:"Casa das Montanhas (Airbnb)", date:"2026-10-12", rows:["Alpine Lodge — 6669 Timothy Lake Rd, East Stroudsburg, PA","Check-in 12/10 16h → Checkout 14/10 10h","Código: HMPAWF4DKA","Self check-in com fechadura inteligente"]},
+  {cat:"Hotel do casamento", date:"2026-10-14", rows:["Hilton Garden Inn, Collegeville, PA","Check-in 14/10 → Checkout 16/10","Booking ID JOY-H-2ab0e8bd08 · Confirmação 255-16878918","Reserva em nome de Thaina Maldonado — +1 484 940 7089"]},
+  {cat:"Hotel Nova York", date:"2026-10-16", rows:["Super 8 by Wyndham Brooklyn — 2718 Fulton St, Brooklyn, NY","Check-in 16/10 15h → Checkout 20/10 11h","Confirmação 6491.062.581 — PIN 3731","Tel: +1 929 307 0107","Sem estacionamento e sem internet no local"]},
+  {cat:"Voo de volta (Arajet)", date:"2026-10-20", rows:["Confirmação 85YSLS","EWR → Punta Cana: DM5311, 20/10 12h00 → 16h19","Punta Cana → GRU: DM6086, 20/10 18h40 → 02h50 (21/10)"]},
+];
+
+/* ================= ESTADO (localStorage — trocar por Firebase depois) ================= */
+const StoreKey = k => "tripe_eua2026_"+k;
+function load(k, fallback){ try{ const v = localStorage.getItem(StoreKey(k)); return v?JSON.parse(v):fallback; }catch(e){ return fallback; } }
+function save(k, v){ try{ localStorage.setItem(StoreKey(k), JSON.stringify(v)); }catch(e){} }
+
+let doneItems = load("done", {});
+let parkDone = load("parkDone", {});
+let customItems = load("customItems", {}); // {date: [items]} — sobrepõe DAYS[].items quando editado
+let editMode = false;
+let extras = load("extras", [
+  {id:"e1", name:"Five Guys", cat:"fastfood", emoji:"🍟", day:null},
+  {id:"e2", name:"Shake Shack", cat:"fastfood", emoji:"🍔", day:null},
+  {id:"e3", name:"Chick-fil-A", cat:"fastfood", emoji:"🍗", day:null},
+  {id:"e4", name:"Raising Cane's", cat:"fastfood", emoji:"🍗", day:null},
+  {id:"e5", name:"Chipotle", cat:"fastfood", emoji:"🌯", day:null},
+  {id:"e6", name:"Wendy's", cat:"fastfood", emoji:"🍔", day:null},
+  {id:"e7", name:"Blizzard (Dairy Queen)", cat:"fastfood", emoji:"🍦", day:"2026-10-10"},
+  {id:"e8", name:"Krispy Kreme", cat:"fastfood", emoji:"🍩", day:null},
+  {id:"e9", name:"Economy Candy (NY)", cat:"fastfood", emoji:"🍬", day:null},
+  {id:"e10", name:"Liberty Bagels (NY)", cat:"fastfood", emoji:"🥯", day:null},
+  {id:"e11", name:"Starbucks", cat:"fastfood", emoji:"☕", day:null},
+  {id:"e12", name:"In-N-Out (se achar no trajeto)", cat:"fastfood", emoji:"🍔", day:null},
+  {id:"e13", name:"White Castle (NY)", cat:"fastfood", emoji:"🍔", day:null},
+  {id:"e14", name:"Bar do HIMYM (McLaren's)", cat:"passeio", emoji:"🛋️", day:null},
+  {id:"e15", name:"Robert's Western World (balada country)", cat:"passeio", emoji:"🤠", day:"2026-10-10"},
+]);
+let expenses = load("expenses", []);
+let memories = load("memories", []);
+
+const ALBUM_UNLOCK = new Date("2026-11-20T00:00:00-03:00");
+const CAT_COLORS = {fastfood:{bg:"#FBE4CD", fg:"#B85C2E"}, passeio:{bg:"#DCEBF2", fg:"#2E6B85"}, outlet:{bg:"#F5E6BE", fg:"#8A6A1A"}, outro:{bg:"#F6D9E2", fg:"#A14E6B"}};
+const CAT_LABEL = {fastfood:"🍔 Fast food", passeio:"📍 Passeio", outlet:"🏬 Outlet/loja", outro:"✨ Outro"};
+
+/* ================= HELPERS ================= */
+function todayStr(){
+  const d = new Date();
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+function findTodayIndex(){
+  const t = todayStr();
+  let idx = DAYS.findIndex(d=>d.date===t);
+  if(idx>=0) return idx;
+  if(t < DAYS[0].date) return 0;
+  return DAYS.length-1;
+}
+function fmtDate(iso){ const [y,m,d] = iso.split("-"); return d+"/"+m; }
+function money(n){ return "US$ "+n.toFixed(2).replace(".",","); }
+function pickEmoji(it, idx){
+  if(it.emoji) return it.emoji;
+  const cycle = ["🌟","📍","🕒","🎉"];
+  return it.prio===0 ? "🌟" : it.prio===1 ? "📍" : "🕒";
+}
+function pickColor(idx){
+  const cyc = ["#4F7A5A","#D97A3D","#4E8FB5","#E3A72B"];
+  return cyc[idx % cyc.length];
+}
+
+/* ================= TAB SWITCH ================= */
+function switchTab(tab){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById("screen-"+tab).classList.add("active");
+  document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active", b.dataset.tab===tab));
+  document.getElementById("fabExtra").style.display = tab==="extras" ? "flex" : "none";
+  document.getElementById("editBtn").style.display = tab==="hoje" ? "flex" : "none";
+  if(tab!=="hoje"){ editMode=false; document.getElementById("editBtn").style.background="rgba(255,255,255,.16)"; }
+  const header = document.getElementById("appHeader");
+  header.classList.toggle("tall", tab==="hoje");
+  if(tab==="hoje") renderHoje();
+  if(tab==="mapa") renderMapa();
+  if(tab==="extras") renderExtras();
+  if(tab==="financeiro") renderFinanceiro();
+  if(tab==="memoria") renderMemoria();
+}
+
+/* ================= HOJE ================= */
+let currentDayIdx = findTodayIndex();
+function getDayItems(day){
+  return customItems[day.date] ? customItems[day.date] : day.items;
+}
+function ensureCustom(day){
+  if(!customItems[day.date]) customItems[day.date] = JSON.parse(JSON.stringify(day.items));
+  return customItems[day.date];
+}
+function renderHoje(){
+  const day = DAYS[currentDayIdx];
+  const isPreview = todayStr() < DAYS[0].date;
+  const isPast = todayStr() > DAYS[DAYS.length-1].date;
+  const dayItems = getDayItems(day);
+  const dayExtras = extras.filter(e=>e.day===day.date);
+  const allItems = [...dayItems, ...dayExtras.map(e=>({name:e.name, prio:1, extra:true, emoji:e.emoji, fromExtras:true}))];
+  const doneCount = allItems.filter((it,i)=>doneItems[day.date+"|"+i]).length;
+  const pct = allItems.length ? (doneCount/allItems.length*100) : 0;
+
+  document.getElementById("headerBody").innerHTML = `
+    <button class="day-nav prev" onclick="changeDay(-1)" ${currentDayIdx===0?'disabled':''}>‹</button>
+    <button class="day-nav next" onclick="changeDay(1)" ${currentDayIdx===DAYS.length-1?'disabled':''}>›</button>
+    <div class="header-greeting">${isPreview?'Prévia da viagem 👋':isPast?'Viagem encerrada ✨':'Oi, turma! 👋'}</div>
+    <h1 class="header-title">${day.title}</h1>
+    <div class="date-pill">📍 ${day.wd.toUpperCase()} · ${fmtDate(day.date)}</div>
+    <svg class="deco-path" width="60" height="34" viewBox="0 0 60 34"><path d="M2 28 Q20 4 58 12" stroke="#fff" stroke-width="2" fill="none" stroke-dasharray="1 7" stroke-linecap="round"/></svg>
+  `;
+
+  let html = `<div class="inner">`;
+  html += `<div class="loc-line">🌴 ${day.loc}</div>`;
+  if(editMode) html += `<div style="text-align:center; font-size:12px; color:var(--accent); font-weight:700; margin-bottom:10px;">✏️ Modo edição — toque no ✕ pra remover</div>`;
+
+  if(allItems.length===0 && !editMode){
+    html += `<div class="empty-note">Nada programado — dia livre 🌤️</div>`;
+  } else {
+    html += `<div class="timeline"><div class="fill" style="height:${pct}%"></div>`;
+    allItems.forEach((it,i)=>{
+      const key = day.date+"|"+i;
+      const isDone = !!doneItems[key];
+      const side = i%2===0 ? "left" : "right";
+      const emoji = isDone ? "✅" : pickEmoji(it,i);
+      const badgeColor = isDone ? "var(--good)" : pickColor(i);
+      const rot = (i%2===0 ? -1 : 1) * (i%3===0?1.4:0.6);
+      let parkHint = "";
+      if(it.isPark){
+        const park = PARKS[it.parkKey];
+        const doneCount = park.items.filter((pi,pidx)=>parkDone[it.parkKey+"|"+pidx]).length;
+        parkHint = `<div class="flag" style="color:var(--accent)">${doneCount}/${park.items.length} atrações · toque pra ver →</div>`;
+      }
+      const isEditable = editMode && i < dayItems.length;
+      const cardClick = editMode ? "" : (it.isPark ? `openParkSheet('${it.parkKey}')` : `toggleItem('${key}')`);
+      const delBtn = isEditable ? `<button onclick="event.stopPropagation(); removeDayItem('${day.date}',${i})" style="position:absolute; top:-8px; ${side==='left'?'left':'right'}:-8px; width:22px; height:22px; border-radius:50%; background:var(--bad); color:#fff; border:2px solid var(--bg); font-size:12px; line-height:1; display:flex; align-items:center; justify-content:center;">✕</button>` : "";
+      const cardHtml = `<div class="tcard ${isDone?'done':''}" style="transform:rotate(${rot}deg); position:relative;" onclick="${cardClick}">
+          ${delBtn}
+          <span class="nm">${it.name}</span>
+          ${parkHint}
+        </div>`;
+      const badgeHtml = `<div class="tbadge" style="background:${badgeColor}" onclick="${editMode?'':`toggleItem('${key}')`}">${emoji}</div>`;
+      html += `<div class="trow">
+        <div class="side left">${side==='left'?cardHtml:''}</div>
+        ${badgeHtml}
+        <div class="side right">${side==='right'?cardHtml:''}</div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  if(editMode){
+    html += `<div style="display:flex; gap:8px; margin-top:16px;">
+      <input id="newItemInput" placeholder="Adicionar item pra este dia..." style="flex:1; padding:11px 13px; border:1.5px solid var(--line2); border-radius:12px; font-family:var(--body); font-size:14px; background:#fff;">
+      <button onclick="addDayItem('${day.date}')" style="background:var(--primary); color:#fff; border:none; width:46px; border-radius:12px; font-size:20px;">+</button>
+    </div>`;
+  }
+
+  html += `</div>`;
+  document.getElementById("screen-hoje").innerHTML = html;
+}
+function toggleEditMode(){
+  editMode = !editMode;
+  document.getElementById("editBtn").style.background = editMode ? "var(--accent)" : "rgba(255,255,255,.16)";
+  renderHoje();
+}
+function removeDayItem(date, idx){
+  const day = DAYS.find(d=>d.date===date);
+  const arr = ensureCustom(day);
+  arr.splice(idx,1);
+  save("customItems", customItems);
+  renderHoje();
+}
+function addDayItem(date){
+  const input = document.getElementById("newItemInput");
+  const name = input.value.trim();
+  if(!name) return;
+  const day = DAYS.find(d=>d.date===date);
+  const arr = ensureCustom(day);
+  arr.push({name, prio:1});
+  save("customItems", customItems);
+  renderHoje();
+}
+function changeDay(delta){
+  currentDayIdx = Math.min(DAYS.length-1, Math.max(0, currentDayIdx+delta));
+  renderHoje();
+}
+function toggleItem(key){
+  doneItems[key] = !doneItems[key];
+  save("done", doneItems);
+  renderHoje();
+}
+
+/* ================= MAPA ================= */
+function renderMapa(){
+  document.getElementById("headerBody").innerHTML = `<div class="header-simple-title">🗺️ Nosso trajeto</div>`;
+  const day = DAYS[findTodayIndex()];
+  const currentNode = day.node;
+  const stepY = 148, startY = 30;
+  const totalH = startY + stepY*(ROUTE_NODES.length-1) + 90;
+
+  let html = `<div class="inner"><div class="map-wrap" style="height:${totalH}px;">`;
+  html += `<div class="blob" style="left:-40px; top:20px; width:170px; height:170px; background:#E8DFC3;"></div>`;
+  html += `<div class="blob" style="right:-60px; top:${stepY*2.2}px; width:210px; height:210px; background:#DCE8DC;"></div>`;
+  html += `<div class="blob" style="left:-50px; top:${stepY*5.4}px; width:190px; height:190px; background:#F0DCC8;"></div>`;
+
+  // connecting path
+  let d = "";
+  ROUTE_NODES.forEach((n,i)=>{
+    const x = n.x, y = startY + stepY*i;
+    if(i===0) d += `M${x},${y} `;
+    else {
+      const prev = ROUTE_NODES[i-1];
+      const py = startY + stepY*(i-1);
+      const midx1 = (prev.x + (prev.x<x?20:-20));
+      const midx2 = (x + (x<prev.x?20:-20));
+      d += `C${midx1},${py+stepY*0.4} ${midx2},${y-stepY*0.4} ${x},${y} `;
+    }
+  });
+  html += `<svg width="100%" height="${totalH}" viewBox="0 0 100 ${totalH}" preserveAspectRatio="none" style="position:absolute; left:0; top:0;">
+    <path d="${d}" fill="none" stroke="#C9BE9E" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+  </svg>`;
+
+  ROUTE_NODES.forEach((n,i)=>{
+    const y = startY + stepY*i;
+    const isCurrent = i===currentNode;
+    const isPast = i<currentNode;
+    const size = isCurrent ? 58 : 42;
+    html += `<div class="mstop ${isCurrent?'current':''}" style="left:calc(${n.x}% - ${size/2}px); top:${y-size/2}px; width:${size}px;">
+      <div class="circ" style="width:${size}px; height:${size}px; background:${isCurrent?'var(--accent)':NODE_COLORS[i]}; font-size:${isCurrent?26:17}px; opacity:${isPast||isCurrent?1:.55};">
+        ${n.emoji}
+        ${isCurrent?'<div class="car">🚗</div>':''}
+      </div>
+      <div class="lbl">${n.label}</div>
+      ${isCurrent?'<div class="here">📍 estamos aqui</div>':`<div style="font-size:9px; color:var(--muted);">${n.sub}</div>`}
+    </div>`;
+  });
+
+  html += `</div></div>`;
+  document.getElementById("screen-mapa").innerHTML = html;
+}
+
+/* ================= EXTRAS ================= */
+let extrasFilter = "all";
+function renderExtras(){
+  document.getElementById("headerBody").innerHTML = `<div class="header-simple-title">✨ Extras</div>`;
+  const cats = ["all","fastfood","passeio","outlet","outro"];
+  let tabsHtml = cats.map(c=>`<button class="${extrasFilter===c?'active':''}" onclick="setExtrasFilter('${c}')">${c==='all'?'Todos':CAT_LABEL[c]}</button>`).join("");
+
+  const groups = extrasFilter==="all" ? ["fastfood","passeio","outlet","outro"] : [extrasFilter];
+  let bodyHtml = "";
+  groups.forEach(cat=>{
+    const list = extras.filter(e=>e.cat===cat);
+    if(!list.length) return;
+    const col = CAT_COLORS[cat];
+    bodyHtml += `<div class="section-title">${CAT_LABEL[cat]}</div><div class="chip-group">`;
+    list.forEach(e=>{
+      const dayOptions = DAYS.map(d=>`<option value="${d.date}" ${e.day===d.date?'selected':''}>${fmtDate(d.date)}</option>`).join("");
+      bodyHtml += `<div class="chip" style="background:${col.bg}; color:${col.fg};">
+        <span>${e.emoji||'✨'} ${e.name}</span>
+        <select onchange="setExtraDay('${e.id}', this.value)">
+          <option value="">📅</option>
+          ${dayOptions}
+        </select>
+      </div>`;
+    });
+    bodyHtml += `</div>`;
+  });
+  if(!bodyHtml) bodyHtml = `<div class="empty-note">Nada nessa categoria ainda</div>`;
+
+  document.getElementById("screen-extras").innerHTML = `<div class="inner">
+    <div class="extras-tabs">${tabsHtml}</div>
+    ${bodyHtml}
+  </div>`;
+}
+function setExtrasFilter(c){ extrasFilter=c; renderExtras(); }
+function setExtraDay(id, day){
+  const e = extras.find(x=>x.id===id);
+  e.day = day || null;
+  save("extras", extras);
+  renderExtras();
+}
+function openAddExtra(){ document.getElementById("addExtraOverlay").classList.add("open"); }
+function closeAddExtra(){ document.getElementById("addExtraOverlay").classList.remove("open"); }
+function addExtra(){
+  const name = document.getElementById("newExtraName").value.trim();
+  if(!name) return;
+  const cat = document.getElementById("newExtraCat").value;
+  const emojiDefault = {fastfood:"🍔",passeio:"📍",outlet:"🏬",outro:"✨"}[cat];
+  extras.push({id:"e"+Date.now(), name, cat, emoji:emojiDefault, day:null});
+  save("extras", extras);
+  document.getElementById("newExtraName").value="";
+  closeAddExtra();
+  renderExtras();
+}
+
+/* ================= FINANCEIRO ================= */
+function renderFinanceiro(){
+  document.getElementById("headerBody").innerHTML = `<div class="header-simple-title">💰 Gastos</div>`;
+  const balances = {};
+  PARTICIPANTS.forEach(p=>{ balances[p]={}; PARTICIPANTS.forEach(q=>{ if(p!==q) balances[p][q]=0; }); });
+  expenses.forEach(exp=>{
+    const share = exp.amount / PARTICIPANTS.length;
+    PARTICIPANTS.forEach(p=>{
+      if(p!==exp.payer){ balances[p][exp.payer] += share; balances[exp.payer][p] -= share; }
+    });
+  });
+
+  let summaryHtml = "";
+  PARTICIPANTS.forEach(p=>{
+    let rows = "";
+    PARTICIPANTS.forEach(q=>{
+      if(p===q) return;
+      const v = balances[p][q];
+      if(Math.abs(v) < 0.005) return;
+      if(v>0) rows += `<div class="balance-row"><span>Você deve pra <b>${q}</b></span><span class="amt neg">${money(v)}</span></div>`;
+      else rows += `<div class="balance-row"><span><b>${q}</b> te deve</span><span class="amt pos">${money(-v)}</span></div>`;
+    });
+    if(rows) summaryHtml += `<div class="card"><div class="section-title">${p}</div>${rows}</div>`;
+  });
+  if(!summaryHtml) summaryHtml = `<div class="empty-note">Ninguém deve nada pra ninguém 🎉</div>`;
+
+  let expHtml = expenses.slice().reverse().map(e=>`
+    <div class="exp-item"><div><b>${e.payer}</b> pagou ${e.desc?('— '+e.desc):''}<div class="d">${fmtDate(e.date)}</div></div><div>${money(e.amount)}</div></div>
+  `).join("") || `<div class="empty-note">Nenhum gasto registrado ainda</div>`;
+
+  document.getElementById("screen-financeiro").innerHTML = `<div class="inner">
+    <div class="card">
+      <div class="section-title">Registrar gasto</div>
+      <div class="field"><label>Quem pagou</label>
+        <select id="expPayer">${PARTICIPANTS.map(p=>`<option>${p}</option>`).join("")}</select>
+      </div>
+      <div class="field"><label>Valor (US$)</label><input type="number" step="0.01" id="expAmount" placeholder="0.00"></div>
+      <div class="field"><label>Descrição (opcional)</label><input type="text" id="expDesc" placeholder="Ex: jantar, ingresso..."></div>
+      <button class="btn" onclick="addExpense()">Adicionar gasto</button>
+    </div>
+    <div class="section-title" style="margin-top:6px;">Saldos</div>
+    ${summaryHtml}
+    <div class="section-title" style="margin-top:6px;">Histórico</div>
+    <div class="card">${expHtml}</div>
+  </div>`;
+}
+function addExpense(){
+  const payer = document.getElementById("expPayer").value;
+  const amount = parseFloat(document.getElementById("expAmount").value);
+  const desc = document.getElementById("expDesc").value.trim();
+  if(!amount || amount<=0) return;
+  expenses.push({id:Date.now(), payer, amount, desc, date: todayStr()});
+  save("expenses", expenses);
+  renderFinanceiro();
+}
+
+/* ================= MEMORIA ================= */
+function renderMemoria(){
+  document.getElementById("headerBody").innerHTML = `<div class="header-simple-title">📸 Memória</div>`;
+  const now = new Date();
+  if(now < ALBUM_UNLOCK){
+    document.getElementById("screen-memoria").innerHTML = `<div class="inner">
+      <div class="card">
+        <div class="section-title">Momento do dia</div>
+        <div class="field"><label>Uma frase de hoje</label><textarea id="memText" placeholder="Como foi o dia de vocês?"></textarea></div>
+        <div class="field"><label>Foto (opcional)</label><input type="file" accept="image/*" id="memPhoto"></div>
+        <button class="btn" onclick="addMemory()">Guardar</button>
+      </div>
+      <div class="lock-screen">
+        <div class="icon">🔒</div>
+        <h3>Guardado com carinho</h3>
+        <p>O álbum completo só destrava em <b>20 de novembro de 2026</b> — pra vocês reverem tudo de uma vez, com aquela sensação boa de nostalgia.</p>
+      </div>
+    </div>`;
+  } else {
+    const list = memories.slice().reverse().map(m=>`
+      <div class="mem-entry">
+        ${m.photo?`<img src="${m.photo}">`:''}
+        <div class="dt">${fmtDate(m.date)}</div>
+        <div class="txt">${m.text}</div>
+      </div>
+    `).join("") || `<div class="empty-note">Nenhuma memória guardada</div>`;
+    document.getElementById("screen-memoria").innerHTML = `<div class="inner"><h2 style="font-size:19px; color:var(--primary); margin-bottom:14px;">📖 Álbum da viagem</h2>${list}</div>`;
+  }
+}
+function addMemory(){
+  const text = document.getElementById("memText").value.trim();
+  const fileInput = document.getElementById("memPhoto");
+  if(!text) return;
+  const finish = (photoDataUrl)=>{
+    memories.push({date:todayStr(), text, photo:photoDataUrl||null});
+    save("memories", memories);
+    document.getElementById("memText").value="";
+    renderMemoria();
+  };
+  if(fileInput.files && fileInput.files[0]){
+    const reader = new FileReader();
+    reader.onload = ()=> finish(reader.result);
+    reader.readAsDataURL(fileInput.files[0]);
+  } else { finish(null); }
+}
+
+/* ================= DOCUMENTOS ================= */
+function openDocs(){ document.getElementById("docsOverlay").classList.add("open"); renderDocs(); }
+function closeDocs(){ document.getElementById("docsOverlay").classList.remove("open"); }
+function renderDocs(){
+  const q = (document.getElementById("docSearch").value||"").toLowerCase();
+  const today = todayStr();
+  let sorted = DOCS.slice().sort((a,b)=> a.date.localeCompare(b.date));
+  let html = sorted.filter(d=>{
+    if(!q) return true;
+    return d.cat.toLowerCase().includes(q) || d.rows.join(" ").toLowerCase().includes(q);
+  }).map(d=>{
+    const isToday = d.date<=today && (sorted.filter(x=>x.date<=today).slice(-1)[0]===d);
+    return `<div class="doc-block ${isToday?'today':''}">
+      <div class="dtitle">${d.cat} ${isToday?'<span class="today-flag">ATUAL</span>':''}</div>
+      ${d.rows.map(r=>`<div class="drow">${r}</div>`).join("")}
+    </div>`;
+  }).join("");
+  document.getElementById("docsList").innerHTML = html || `<div class="empty-note">Nada encontrado</div>`;
+}
+
+/* ================= PARK ATTRACTIONS SHEET ================= */
+function openParkSheet(parkKey){
+  document.getElementById("parkOverlay").dataset.parkKey = parkKey;
+  document.getElementById("parkOverlay").classList.add("open");
+  renderParkSheet();
+}
+function closeParkSheet(){ document.getElementById("parkOverlay").classList.remove("open"); }
+function renderParkSheet(){
+  const parkKey = document.getElementById("parkOverlay").dataset.parkKey;
+  const park = PARKS[parkKey];
+  document.getElementById("parkSheetTitle").textContent = park.emoji+" "+park.name;
+  const prioLabel = {0:"Imperdível",1:"Prioridade",2:"Se sobrar"};
+  const prioColor = {0:"var(--accent)",1:"var(--gold)",2:"var(--muted)"};
+  let html = park.items.map((it,i)=>{
+    const key = parkKey+"|"+i;
+    const done = !!parkDone[key];
+    return `<div class="doc-block" style="cursor:pointer; ${done?'opacity:.55':''}" onclick="toggleParkAttraction('${parkKey}',${i})">
+      <div class="dtitle">
+        <span style="${done?'text-decoration:line-through; color:var(--muted);':''}">${done?'✅ ':''}${it.name}</span>
+        <span class="today-flag" style="background:${prioColor[it.prio]}">${prioLabel[it.prio]}</span>
+      </div>
+      ${it.note?`<div class="drow">💡 ${it.note}</div>`:''}
+    </div>`;
+  }).join("");
+  document.getElementById("parkSheetList").innerHTML = html;
+}
+function toggleParkAttraction(parkKey, i){
+  const key = parkKey+"|"+i;
+  parkDone[key] = !parkDone[key];
+  save("parkDone", parkDone);
+  renderParkSheet();
+}
+
+/* ================= PWA MANIFEST (inline) ================= */
+const manifest = {
+  name: "Tripê", short_name: "Tripê", start_url: ".", display: "standalone",
+  background_color: "#FAF6EE", theme_color: "#21402E",
+  icons: [
+    {src:"data:image/png;base64,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", sizes:"192x192", type:"image/png"},
+    {src:"data:image/png;base64,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", sizes:"512x512", type:"image/png"}
+  ]
+};
+const manifestBlob = new Blob([JSON.stringify(manifest)], {type:"application/json"});
+const manifestLink = document.createElement("link");
+manifestLink.rel = "manifest";
+manifestLink.href = URL.createObjectURL(manifestBlob);
+document.head.appendChild(manifestLink);
+
+/* ================= INIT ================= */
+renderHoje();
+</script>
+</body>
+</html>
